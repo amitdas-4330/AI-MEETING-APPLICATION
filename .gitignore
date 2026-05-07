@@ -1,0 +1,25 @@
+# Node
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# MongoDB local data
+mongodb-data/
+
+# Build folders
+build/
+dist/
+
+# Logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db

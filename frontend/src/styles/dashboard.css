@@ -1,0 +1,166 @@
+
+/* ============================= */
+/* DASHBOARD LAYOUT */
+/* ============================= */
+
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #020617;
+}
+
+/* ============================= */
+/* MAIN WRAPPER */
+/* ============================= */
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+
+  /* FIX: allow sidebar animation on mobile */
+  overflow: visible;
+}
+
+/* ============================= */
+/* CONTENT AREA */
+/* ============================= */
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+
+  margin-left: 260px;
+
+  scroll-behavior: smooth;
+
+  transition: margin 0.3s ease; /* smooth shift */
+}
+
+/* ============================= */
+/* PANEL ROW */
+/* ============================= */
+
+.panel-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* ============================= */
+/* LARGE DESKTOP */
+/* ============================= */
+
+@media (min-width: 1440px) {
+  .dashboard-content {
+    padding: 30px 60px;
+    margin-left: 300px;
+  }
+
+  .panel-row {
+    gap: 30px;
+  }
+}
+
+/* ============================= */
+/* LAPTOP */
+/* ============================= */
+
+@media (max-width: 1200px) {
+  .dashboard-content {
+    padding: 18px;
+    margin-left: 230px;
+  }
+
+  .panel-row {
+    gap: 16px;
+  }
+}
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 1024px) {
+
+  .dashboard-main {
+    flex-direction: column;
+  }
+
+  .dashboard-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .panel-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* ============================= */
+/* MOBILE FIX (IMPORTANT) */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .dashboard-content {
+    margin-left: 0;
+    padding: 12px;
+
+    /* FIX: prevent sidebar overlap */
+    width: 100%;
+  }
+
+  .panel-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* OPTIONAL: if sidebar open state exists */
+  .sidebar.open ~ .dashboard-content {
+    transform: translateX(260px);
+  }
+}
+
+/* ============================= */
+/* SMALL MOBILE */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .panel-row {
+    gap: 10px;
+  }
+}
+
+
+/* ============================= */
+/* FIX: NAVBAR OVERLAP ISSUE */
+/* ============================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* prevents content hiding behind fixed navbar */
+.section {
+  scroll-margin-top: 80px; /* navbar height + buffer */
+}
+
+
+/* spacing between sections */
+.section {
+  margin-bottom: 40px;
+}
+
+/* extra spacing for transcript & summary blocks */
+#transcript,
+#summary {
+  padding: 10px 0;
+}

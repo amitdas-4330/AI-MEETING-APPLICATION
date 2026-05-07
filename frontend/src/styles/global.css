@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 60px);
+}

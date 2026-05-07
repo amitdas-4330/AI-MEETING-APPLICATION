@@ -1,0 +1,606 @@
+/* =========================================================
+   SIDEBAR MODERN UI
+========================================================= */
+
+/* =============================
+   SIDEBAR
+============================= */
+
+.sidebar {
+  position: fixed;
+
+  top: 64px;
+  left: 0;
+
+  width: 280px;
+  height: calc(100vh - 64px);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2,6,23,0.96),
+      rgba(15,23,42,0.96)
+    );
+
+  backdrop-filter: blur(24px);
+
+  border-right: 1px solid rgba(255,255,255,0.08);
+
+  overflow: hidden;
+
+  z-index: 1200;
+
+  transition:
+    transform 0.35s ease,
+    width 0.35s ease,
+    box-shadow 0.35s ease;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.35);
+
+  animation: sidebarFade 0.6s ease;
+}
+
+/* animated glow border */
+.sidebar::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 1px;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(56,189,248,0.6),
+      transparent
+    );
+
+  animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes sidebarFade {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =============================
+   SIDEBAR HEADER
+============================= */
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+/* =============================
+   TOGGLE BUTTON
+============================= */
+
+.sidebar-toggle {
+  position: fixed;
+
+  top: 14px;
+  left: 15px;
+
+  width: 46px;
+  height: 46px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #6366f1
+    );
+
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  z-index: 1400;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 10px 25px rgba(59,130,246,0.3);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* shine animation */
+.sidebar-toggle::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.3),
+      transparent
+    );
+
+  transition: 0.7s;
+}
+
+.sidebar-toggle:hover::before {
+  left: 100%;
+}
+
+.sidebar-toggle:hover {
+  transform: scale(1.05);
+
+  box-shadow:
+    0 15px 35px rgba(59,130,246,0.45);
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.95);
+}
+
+/* =============================
+   NEW MEETING BUTTON
+============================= */
+
+.new-meeting-btn {
+  position: relative;
+
+  border: none;
+  outline: none;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #6366f1
+    );
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-bottom: 24px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* shine effect */
+.new-meeting-btn::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.28),
+      transparent
+    );
+
+  transition: 0.7s;
+}
+
+.new-meeting-btn:hover::before {
+  left: 100%;
+}
+
+.new-meeting-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 40px rgba(59,130,246,0.35);
+}
+
+.new-meeting-btn:active {
+  transform: scale(0.97);
+}
+
+/* =============================
+   HISTORY TITLE
+============================= */
+
+.history-title {
+  position: relative;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.55);
+
+  margin-bottom: 14px;
+}
+
+/* glowing underline */
+.history-title::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+
+  width: 40px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #22c55e
+    );
+}
+
+/* =============================
+   HISTORY LIST
+============================= */
+
+.history-list {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+/* scrollbar */
+.history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(56,189,248,0.5),
+      rgba(99,102,241,0.5)
+    );
+}
+
+/* =============================
+   HISTORY ITEM
+============================= */
+
+.history-item {
+  position: relative;
+
+  padding: 14px 14px;
+
+  border-radius: 16px;
+
+  margin-bottom: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.02)
+    );
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+
+  animation: historyFade 0.4s ease;
+}
+
+/* side glow */
+.history-item::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 4px;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #38bdf8,
+      #6366f1
+    );
+
+  opacity: 0;
+
+  transition: 0.3s ease;
+}
+
+/* hover */
+.history-item:hover {
+  transform: translateX(6px);
+
+  border-color: rgba(56,189,248,0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(56,189,248,0.08),
+      rgba(99,102,241,0.04)
+    );
+
+  box-shadow:
+    0 12px 28px rgba(56,189,248,0.08);
+}
+
+.history-item:hover::before {
+  opacity: 1;
+}
+
+/* active */
+.history-item.active {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(56,189,248,0.14),
+      rgba(99,102,241,0.08)
+    );
+
+  border-color: rgba(56,189,248,0.28);
+}
+
+.history-item.active::before {
+  opacity: 1;
+}
+
+@keyframes historyFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================
+   EMPTY HISTORY
+============================= */
+
+.empty-history {
+  text-align: center;
+
+  color: #64748b;
+
+  padding: 25px 10px;
+
+  line-height: 1.7;
+
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =============================
+   MOBILE OVERLAY
+============================= */
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.55);
+
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.35s ease;
+
+  z-index: 1100;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =============================
+   LARGE SCREENS
+============================= */
+
+@media (min-width: 1440px) {
+
+  .sidebar {
+    width: 320px;
+  }
+}
+
+/* =============================
+   LAPTOP
+============================= */
+
+@media (max-width: 1200px) {
+
+  .sidebar {
+    width: 250px;
+  }
+
+  .new-meeting-btn {
+    font-size: 13px;
+  }
+}
+
+/* =============================
+   TABLET
+============================= */
+
+@media (max-width: 992px) {
+
+  .sidebar {
+    width: 230px;
+  }
+}
+
+/* =============================
+   MOBILE DRAWER MODE
+============================= */
+
+@media (max-width: 768px) {
+
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .sidebar {
+    top: 0;
+
+    width: 300px;
+    height: 100vh;
+
+    transform: translateX(-100%);
+
+    border-right:
+      1px solid rgba(255,255,255,0.08);
+
+    z-index: 1300;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.55);
+  }
+}
+
+/* =============================
+   SMALL MOBILE
+============================= */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    width: 85%;
+    padding: 16px;
+  }
+
+  .history-item {
+    font-size: 13px;
+
+    padding: 12px;
+  }
+
+  .new-meeting-btn {
+    padding: 12px;
+  }
+
+  .sidebar-toggle {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+}
+
+/* =============================
+   DESKTOP SAFETY
+============================= */
+
+@media (min-width: 769px) {
+
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+  .sidebar-toggle {
+    display: none !important;
+  }
+}

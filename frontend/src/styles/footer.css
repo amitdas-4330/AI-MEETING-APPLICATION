@@ -1,0 +1,547 @@
+/* =========================================================
+   ULTRA MODERN FOOTER — PREMIUM SaaS UI
+   Fully Responsive + Smooth Animations
+========================================================= */
+
+.footer-extra {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(16,185,129,0.10), transparent 28%),
+    linear-gradient(180deg, #020617 0%, #081120 45%, #0b1220 100%);
+
+  padding: 90px 32px 28px;
+  margin-top: 80px;
+
+  color: white;
+
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* =========================================================
+   Animated Background Orbs
+========================================================= */
+
+.footer-extra::before,
+.footer-extra::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  animation: orbFloat 10s ease-in-out infinite;
+}
+
+.footer-extra::before {
+  width: 420px;
+  height: 420px;
+  background: rgba(59,130,246,0.16);
+  top: -160px;
+  left: -120px;
+}
+
+.footer-extra::after {
+  width: 360px;
+  height: 360px;
+  background: rgba(34,197,94,0.12);
+  bottom: -140px;
+  right: -100px;
+  animation-delay: 2s;
+}
+
+/* =========================================================
+   Shared Layer
+========================================================= */
+
+.footer-banner,
+.footer-grid,
+.footer-highlights,
+.footer-bottom {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   HERO BANNER
+========================================================= */
+
+.footer-banner {
+  text-align: center;
+  margin-bottom: 60px;
+
+  animation: fadeUp 0.8s ease;
+}
+
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  margin-bottom: 20px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5e1;
+
+  transition: 0.3s ease;
+}
+
+.footer-badge:hover {
+  transform: translateY(-2px);
+  background: rgba(59,130,246,0.12);
+}
+
+.footer-banner h2 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+
+  margin-bottom: 18px;
+
+  background: linear-gradient(
+    90deg,
+    #60a5fa,
+    #93c5fd,
+    #38bdf8
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: -1px;
+}
+
+.footer-banner p {
+  max-width: 760px;
+  margin: auto;
+
+  color: rgba(255,255,255,0.72);
+
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.8;
+}
+
+/* =========================================================
+   HIGHLIGHT CARDS
+========================================================= */
+
+.footer-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 14px;
+  margin-bottom: 55px;
+}
+
+.highlight-card {
+  position: relative;
+
+  padding: 11px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 500;
+
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.highlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.12),
+    transparent
+  );
+
+  transform: translateX(-100%);
+  transition: 0.7s;
+}
+
+.highlight-card:hover::before {
+  transform: translateX(100%);
+}
+
+.highlight-card:hover {
+  transform: translateY(-4px) scale(1.03);
+
+  border-color: rgba(96,165,250,0.35);
+
+  background: rgba(59,130,246,0.14);
+
+  box-shadow:
+    0 10px 30px rgba(59,130,246,0.15);
+}
+
+/* =========================================================
+   GRID SECTION
+========================================================= */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 28px;
+
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* =========================================================
+   COLUMN CARD
+========================================================= */
+
+.footer-col {
+  position: relative;
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(16px);
+
+  transition: all 0.35s ease;
+
+  animation: fadeUp 0.7s ease;
+}
+
+.footer-col:hover {
+  transform: translateY(-8px);
+
+  background: rgba(255,255,255,0.06);
+
+  border-color: rgba(96,165,250,0.18);
+
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.35),
+    0 0 25px rgba(59,130,246,0.08);
+}
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.footer-col h3 {
+  position: relative;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  margin-bottom: 18px;
+
+  color: #ffffff;
+}
+
+.footer-col h3::after {
+  content: "";
+
+  width: 50px;
+  height: 3px;
+
+  margin-top: 10px;
+  display: block;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #38bdf8
+  );
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.footer-col p {
+  color: rgba(255,255,255,0.72);
+
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col li {
+  position: relative;
+
+  margin-bottom: 12px;
+  padding-left: 18px;
+
+  color: rgba(255,255,255,0.72);
+
+  font-size: 14px;
+
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+}
+
+.footer-col li::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 9px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #60a5fa;
+
+  box-shadow: 0 0 10px rgba(96,165,250,0.8);
+}
+
+.footer-col li:hover {
+  color: white;
+  transform: translateX(6px);
+}
+
+/* =========================================================
+   ABOUT LIST
+========================================================= */
+
+.about-list {
+  margin-top: 14px;
+  padding-left: 18px;
+}
+
+.about-list li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.footer-bottom {
+  margin-top: 65px;
+  padding-top: 22px;
+
+  text-align: center;
+
+  border-top: 1px solid rgba(255,255,255,0.08);
+
+  color: rgba(255,255,255,0.55);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(25px) scale(1.08);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* =========================================================
+   LARGE LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-extra {
+    padding: 80px 28px 28px;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .footer-extra {
+    padding: 70px 22px 24px;
+  }
+
+  .footer-banner {
+    margin-bottom: 45px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .footer-col {
+    padding: 22px;
+  }
+
+  .footer-bottom {
+    margin-top: 45px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .footer-extra {
+    padding: 60px 18px 24px;
+    margin-top: 60px;
+  }
+
+  .footer-banner h2 {
+    line-height: 1.25;
+  }
+
+  .footer-banner p {
+    line-height: 1.7;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-col {
+    padding: 20px;
+  }
+
+  .footer-col li {
+    padding-left: 16px;
+  }
+
+  .footer-highlights {
+    gap: 10px;
+  }
+
+  .highlight-card {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .footer-extra {
+    padding: 50px 14px 22px;
+  }
+
+  .footer-banner {
+    margin-bottom: 38px;
+  }
+
+  .footer-banner h2 {
+    font-size: 1.9rem;
+  }
+
+  .footer-banner p {
+    font-size: 13px;
+  }
+
+  .footer-col {
+    border-radius: 20px;
+    padding: 18px;
+  }
+
+  .footer-col h3 {
+    font-size: 16px;
+  }
+
+  .footer-col p,
+  .footer-col li {
+    font-size: 13px;
+  }
+
+  .highlight-card {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-highlights{
+    margin-top:10px;
+  }
+
+  .footer-bottom {
+    margin-top: 35px;
+    font-size: 12px;
+  }
+}
+
+.footer-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  margin-top: 80px;
+  margin-bottom: 55px;
+}
