@@ -1,33 +1,29 @@
 /* =========================================================
-   SIDEBAR MODERN UI
+   ULTRA MODERN SIDEBAR UI
 ========================================================= */
-
-/* =============================
-   SIDEBAR
-============================= */
 
 .sidebar {
   position: fixed;
-
   top: 64px;
   left: 0;
 
-  width: 280px;
+  width: 290px;
   height: calc(100vh - 64px);
 
   display: flex;
   flex-direction: column;
 
-  padding: 18px;
+  padding: 20px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(2,6,23,0.96),
-      rgba(15,23,42,0.96)
+      rgba(2, 6, 23, 0.92),
+      rgba(15, 23, 42, 0.96)
     );
 
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 
   border-right: 1px solid rgba(255,255,255,0.08);
 
@@ -35,57 +31,76 @@
 
   z-index: 1200;
 
-  transition:
-    transform 0.35s ease,
-    width 0.35s ease,
-    box-shadow 0.35s ease;
-
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.35);
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 20px 60px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.04);
 
-  animation: sidebarFade 0.6s ease;
+  animation: sidebarReveal 0.7s ease;
+
+  isolation: isolate;
 }
 
-/* animated glow border */
-.sidebar::before {
+/* =========================================================
+   BACKGROUND GLOW ORBS
+========================================================= */
+
+.sidebar::before,
+.sidebar::after {
   content: "";
 
   position: absolute;
-  top: 0;
-  right: 0;
+  border-radius: 50%;
 
-  width: 1px;
-  height: 100%;
+  filter: blur(70px);
 
-  background:
-    linear-gradient(
-      180deg,
-      transparent,
-      rgba(56,189,248,0.6),
-      transparent
-    );
+  opacity: 0.25;
 
-  animation: borderGlow 3s linear infinite;
+  z-index: -1;
+
+  animation: floatingGlow 10s ease-in-out infinite;
 }
 
-@keyframes borderGlow {
+.sidebar::before {
+  width: 220px;
+  height: 220px;
+
+  background: #3b82f6;
+
+  top: -80px;
+  left: -100px;
+}
+
+.sidebar::after {
+  width: 180px;
+  height: 180px;
+
+  background: #8b5cf6;
+
+  bottom: -60px;
+  right: -80px;
+
+  animation-delay: 4s;
+}
+
+@keyframes floatingGlow {
   0% {
-    opacity: 0.3;
+    transform: translateY(0px) scale(1);
   }
 
   50% {
-    opacity: 1;
+    transform: translateY(20px) scale(1.1);
   }
 
   100% {
-    opacity: 0.3;
+    transform: translateY(0px) scale(1);
   }
 }
 
-@keyframes sidebarFade {
+@keyframes sidebarReveal {
   from {
     opacity: 0;
-    transform: translateX(-25px);
+    transform: translateX(-35px);
   }
 
   to {
@@ -94,203 +109,118 @@
   }
 }
 
-/* =============================
-   SIDEBAR HEADER
-============================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-/* =============================
-   TOGGLE BUTTON
-============================= */
-
-.sidebar-toggle {
-  position: fixed;
-
-  top: 14px;
-  left: 15px;
-
-  width: 46px;
-  height: 46px;
-
-  border: none;
-  outline: none;
-
-  border-radius: 14px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #3b82f6,
-      #6366f1
-    );
-
-  color: white;
-
-  font-size: 20px;
-
-  cursor: pointer;
-
-  z-index: 1400;
-
-  display: none;
-
-  align-items: center;
-  justify-content: center;
-
-  box-shadow:
-    0 10px 25px rgba(59,130,246,0.3);
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* shine animation */
-.sidebar-toggle::before {
-  content: "";
-
-  position: absolute;
-  top: 0;
-  left: -100%;
-
-  width: 100%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.3),
-      transparent
-    );
-
-  transition: 0.7s;
-}
-
-.sidebar-toggle:hover::before {
-  left: 100%;
-}
-
-.sidebar-toggle:hover {
-  transform: scale(1.05);
-
-  box-shadow:
-    0 15px 35px rgba(59,130,246,0.45);
-}
-
-.sidebar-toggle:active {
-  transform: scale(0.95);
-}
-
-/* =============================
+/* =========================================================
    NEW MEETING BUTTON
-============================= */
+========================================================= */
 
 .new-meeting-btn {
   position: relative;
 
-  border: none;
-  outline: none;
+  border: 1px solid rgba(255,255,255,0.08);
 
-  padding: 14px;
+  padding: 15px;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
   background:
     linear-gradient(
       135deg,
-      #3b82f6,
-      #6366f1
+      rgba(59,130,246,0.95),
+      rgba(99,102,241,0.95)
     );
 
   color: white;
 
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.4px;
 
   cursor: pointer;
 
-  margin-bottom: 24px;
-
   overflow: hidden;
 
+  margin-bottom: 26px;
+
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border 0.35s ease;
 }
 
-/* shine effect */
+/* animated shine */
 .new-meeting-btn::before {
   content: "";
 
   position: absolute;
-  top: 0;
-  left: -100%;
-
-  width: 100%;
-  height: 100%;
+  inset: 0;
 
   background:
     linear-gradient(
-      90deg,
+      120deg,
       transparent,
-      rgba(255,255,255,0.28),
+      rgba(255,255,255,0.35),
       transparent
     );
 
-  transition: 0.7s;
+  transform: translateX(-120%);
+
+  transition: 0.8s ease;
 }
 
 .new-meeting-btn:hover::before {
-  left: 100%;
+  transform: translateX(120%);
 }
 
 .new-meeting-btn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.02);
 
   box-shadow:
+    0 0 30px rgba(59,130,246,0.45),
     0 18px 40px rgba(59,130,246,0.35);
+
+  border-color: rgba(255,255,255,0.18);
 }
 
-.new-meeting-btn:active {
-  transform: scale(0.97);
-}
-
-/* =============================
+/* =========================================================
    HISTORY TITLE
-============================= */
+========================================================= */
 
 .history-title {
   position: relative;
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
 
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.5);
 
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
-/* glowing underline */
 .history-title::after {
   content: "";
 
   position: absolute;
-  left: 0;
-  bottom: -6px;
 
-  width: 40px;
-  height: 2px;
+  left: 0;
+  bottom: -8px;
+
+  width: 55px;
+  height: 3px;
 
   border-radius: 999px;
 
@@ -298,13 +228,16 @@
     linear-gradient(
       90deg,
       #38bdf8,
-      #22c55e
+      #8b5cf6
     );
+
+  box-shadow:
+    0 0 12px rgba(56,189,248,0.6);
 }
 
-/* =============================
+/* =========================================================
    HISTORY LIST
-============================= */
+========================================================= */
 
 .history-list {
   flex: 1;
@@ -314,9 +247,9 @@
   padding-right: 4px;
 }
 
-/* scrollbar */
+/* futuristic scrollbar */
 .history-list::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .history-list::-webkit-scrollbar-thumb {
@@ -325,110 +258,151 @@
   background:
     linear-gradient(
       180deg,
-      rgba(56,189,248,0.5),
-      rgba(99,102,241,0.5)
+      #38bdf8,
+      #8b5cf6
     );
 }
 
-/* =============================
+/* =========================================================
    HISTORY ITEM
-============================= */
+========================================================= */
 
 .history-item {
   position: relative;
 
-  padding: 14px 14px;
+  padding: 15px;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 
   background:
     linear-gradient(
       145deg,
-      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.06),
       rgba(255,255,255,0.02)
     );
 
-  border: 1px solid rgba(255,255,255,0.06);
-
-  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.07);
 
   overflow: hidden;
 
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    border 0.3s ease,
-    box-shadow 0.3s ease;
+  cursor: pointer;
 
-  animation: historyFade 0.4s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border 0.35s ease,
+    background 0.35s ease;
+
+  animation: cardReveal 0.5s ease;
 }
 
-/* side glow */
+/* glowing beam */
 .history-item::before {
   content: "";
 
   position: absolute;
-  left: 0;
+
+  left: -100%;
   top: 0;
 
-  width: 4px;
+  width: 100%;
   height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.08),
+      transparent
+    );
+
+  transition: 0.8s ease;
+}
+
+/* left neon border */
+.history-item::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 12%;
+
+  width: 4px;
+  height: 76%;
+
+  border-radius: 999px;
 
   background:
     linear-gradient(
       180deg,
       #38bdf8,
-      #6366f1
+      #8b5cf6
     );
 
   opacity: 0;
 
-  transition: 0.3s ease;
+  transition: 0.35s ease;
+
+  box-shadow:
+    0 0 15px rgba(56,189,248,0.8);
 }
 
-/* hover */
-.history-item:hover {
-  transform: translateX(6px);
+.history-item:hover::before {
+  left: 100%;
+}
 
-  border-color: rgba(56,189,248,0.22);
+.history-item:hover {
+  transform: translateX(6px) scale(1.015);
 
   background:
     linear-gradient(
       145deg,
-      rgba(56,189,248,0.08),
-      rgba(99,102,241,0.04)
+      rgba(59,130,246,0.12),
+      rgba(139,92,246,0.06)
     );
 
+  border-color: rgba(56,189,248,0.22);
+
   box-shadow:
-    0 12px 28px rgba(56,189,248,0.08);
+    0 10px 35px rgba(56,189,248,0.12),
+    0 0 25px rgba(59,130,246,0.12);
 }
 
-.history-item:hover::before {
+.history-item:hover::after {
   opacity: 1;
 }
 
-/* active */
+/* ACTIVE ITEM */
+
 .history-item.active {
   background:
     linear-gradient(
       145deg,
-      rgba(56,189,248,0.14),
-      rgba(99,102,241,0.08)
+      rgba(59,130,246,0.18),
+      rgba(139,92,246,0.1)
     );
 
-  border-color: rgba(56,189,248,0.28);
+  border-color: rgba(56,189,248,0.35);
+
+  box-shadow:
+    0 0 25px rgba(56,189,248,0.16);
 }
 
-.history-item.active::before {
+.history-item.active::after {
   opacity: 1;
 }
 
-@keyframes historyFade {
+/* =========================================================
+   CARD REVEAL
+========================================================= */
+
+@keyframes cardReveal {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
 
   to {
@@ -437,103 +411,29 @@
   }
 }
 
-/* =============================
+/* =========================================================
    EMPTY HISTORY
-============================= */
+========================================================= */
 
 .empty-history {
   text-align: center;
 
-  color: #64748b;
+  padding: 30px 15px;
 
-  padding: 25px 10px;
+  color: #94a3b8;
 
-  line-height: 1.7;
+  line-height: 1.8;
+
+  font-size: 14px;
 
   animation: fadeIn 0.6s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* =============================
-   MOBILE OVERLAY
-============================= */
-
-.sidebar-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0,0,0,0.55);
-
-  backdrop-filter: blur(4px);
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition: 0.35s ease;
-
-  z-index: 1100;
-}
-
-.sidebar-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* =============================
-   LARGE SCREENS
-============================= */
-
-@media (min-width: 1440px) {
-
-  .sidebar {
-    width: 320px;
-  }
-}
-
-/* =============================
-   LAPTOP
-============================= */
-
-@media (max-width: 1200px) {
-
-  .sidebar {
-    width: 250px;
-  }
-
-  .new-meeting-btn {
-    font-size: 13px;
-  }
-}
-
-/* =============================
-   TABLET
-============================= */
-
-@media (max-width: 992px) {
-
-  .sidebar {
-    width: 230px;
-  }
-}
-
-/* =============================
-   MOBILE DRAWER MODE
-============================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 768px) {
-
-  .sidebar-toggle {
-    display: flex;
-  }
 
   .sidebar {
     top: 0;
@@ -542,65 +442,22 @@
     height: 100vh;
 
     transform: translateX(-100%);
-
-    border-right:
-      1px solid rgba(255,255,255,0.08);
-
-    z-index: 1300;
   }
 
   .sidebar.open {
     transform: translateX(0);
-
-    box-shadow:
-      0 20px 60px rgba(0,0,0,0.55);
   }
 }
-
-/* =============================
-   SMALL MOBILE
-============================= */
 
 @media (max-width: 480px) {
 
   .sidebar {
-    width: 85%;
+    width: 86%;
     padding: 16px;
   }
 
   .history-item {
+    padding: 13px;
     font-size: 13px;
-
-    padding: 12px;
-  }
-
-  .new-meeting-btn {
-    padding: 12px;
-  }
-
-  .sidebar-toggle {
-    width: 42px;
-    height: 42px;
-
-    font-size: 18px;
-  }
-}
-
-/* =============================
-   DESKTOP SAFETY
-============================= */
-
-@media (min-width: 769px) {
-
-  .sidebar {
-    transform: translateX(0) !important;
-  }
-
-  .sidebar-overlay {
-    display: none;
-  }
-
-  .sidebar-toggle {
-    display: none !important;
   }
 }
