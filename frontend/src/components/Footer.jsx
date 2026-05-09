@@ -4,10 +4,8 @@ function Footer() {
   return (
     <div className="footer-extra" id="about">
 
-      {/* Glow background */}
       <div className="footer-glow"></div>
 
-      {/* Top Banner */}
       <div className="footer-banner">
         <h2>🚀 AI Meeting Assistant</h2>
         <p>Turn conversations into structured knowledge instantly</p>
@@ -33,8 +31,7 @@ function Footer() {
             <li>Improves productivity and saves time</li>
           </ul>
         </div>
-
-        {/* Features */}
+        
         <div className="footer-col">
           <h3>Features</h3>
           <ul>
@@ -48,7 +45,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Tech Stack */}
         <div className="footer-col">
           <h3>Tech Stack</h3>
           <ul>
@@ -61,7 +57,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Contact */}
         <div className="footer-col">
           <h3>Contact</h3>
           <p>📧 amitbarandas2@.com</p>
@@ -69,7 +64,6 @@ function Footer() {
           <p>📍 India</p>
         </div>
 
-        {/* Quick Links */}
         <div className="footer-col">
           <h3>Quick Links</h3>
           <ul>
@@ -80,7 +74,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Connect */}
         <div className="footer-col">
           <h3>Connect</h3>
           <p>🔗 GitHub</p>
@@ -89,7 +82,6 @@ function Footer() {
 
       </div>
 
-      {/* Feature Highlights */}
       <div className="footer-highlights">
         <div className="highlight-card">⚡ Fast Processing</div>
         <div className="highlight-card">🔐 Secure Data</div>
@@ -97,7 +89,6 @@ function Footer() {
         <div className="highlight-card">🤖 AI Driven</div>
       </div>
 
-      {/* Bottom */}
       <div className="footer-bottom">
         © 2026 AI Meeting Summarizer • Built with ❤️
         <br />

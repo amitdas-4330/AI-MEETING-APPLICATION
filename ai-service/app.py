@@ -1,5 +1,3 @@
-# app.py
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import subprocess
@@ -19,10 +17,7 @@ WAV_HEADER_SIZE      = 44
 sessions      = {}
 sessions_lock = threading.Lock()
 
-
-# =========================================================
 # SESSION
-# =========================================================
 
 def get_session(session_id):
 
@@ -58,10 +53,7 @@ def get_session(session_id):
 
         return sessions[session_id]
 
-
-# =========================================================
 # CLEANUP
-# =========================================================
 
 def cleanup_session(session_id):
 
@@ -83,10 +75,7 @@ def cleanup_session(session_id):
             except Exception:
                 pass
 
-
-# =========================================================
 # FFMPEG
-# =========================================================
 
 def run_ffmpeg(args):
 
@@ -98,10 +87,7 @@ def run_ffmpeg(args):
 
     return result.returncode, result.stderr
 
-
-# =========================================================
 # STREAM AUDIO
-# =========================================================
 
 @app.route("/stream-audio", methods=["POST"])
 def stream_audio():
@@ -130,10 +116,8 @@ def stream_audio():
     with sess["lock"]:
 
         try:
-
-            # =================================================
+            
             # APPEND WEBM CHUNK
-            # =================================================
 
             chunk_data = audio.read()
 
@@ -145,9 +129,7 @@ def stream_audio():
             with open(sess["webm_path"], "ab") as f:
                 f.write(chunk_data)
 
-            # =================================================
             # FULL WEBM -> FULL WAV
-            # =================================================
 
             rc, stderr = run_ffmpeg([
 
@@ -176,9 +158,7 @@ def stream_audio():
                     "summary": ""
                 })
 
-            # =================================================
             # CALCULATE NEW AUDIO
-            # =================================================
 
             wav_size = os.path.getsize(
                 sess["full_wav_path"]
@@ -217,9 +197,7 @@ def stream_audio():
                     "summary": ""
                 })
 
-            # =================================================
             # CREATE NEW AUDIO SLICE
-            # =================================================
 
             tmp = tempfile.gettempdir()
 
@@ -271,9 +249,7 @@ def stream_audio():
             # update processed pcm
             sess["prev_pcm_bytes"] = total_pcm
 
-            # =================================================
             # TRANSCRIBE WITH DIARIZATION
-            # =================================================
 
             transcript, updated_map, next_id = transcribe_audio(
 
@@ -305,9 +281,7 @@ def stream_audio():
                     "summary": ""
                 })
 
-            # =================================================
             # SUMMARY
-            # =================================================
 
             full_context = (
 
@@ -320,9 +294,7 @@ def stream_audio():
 
             summary = summarize_text(full_context)
 
-            # =================================================
             # RESPONSE
-            # =================================================
 
             return jsonify({
 
@@ -346,10 +318,7 @@ def stream_audio():
                 "error": str(e)
             })
 
-
-# =========================================================
 # END SESSION
-# =========================================================
 
 @app.route("/end-session", methods=["POST"])
 def end_session():
@@ -371,10 +340,7 @@ def end_session():
         "ok": True
     })
 
-
-# =========================================================
 # RUN SERVER
-# =========================================================
 
 if __name__ == "__main__":
 

@@ -84,7 +84,6 @@ function TeamSection() {
         ))}
       </div>
 
-      {/* MODAL */}
       {selectedDev && (
         <div
           className="modal-overlay"

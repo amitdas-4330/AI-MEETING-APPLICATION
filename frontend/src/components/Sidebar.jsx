@@ -1,7 +1,7 @@
 import "../styles/sidebar.css";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const navigate = useNavigate();
 
@@ -13,47 +13,63 @@ function Sidebar() {
 
   return (
 
-    <div className="sidebar">
+    <>
 
-      {/* New Meeting Button */}
+      {/* OVERLAY */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
-      <button
-        className="new-meeting-btn"
-        onClick={() => navigate("/recorder")}
-      >
+      {/* SIDEBAR */}
+      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
 
-        + New Meeting
+        {/* MOBILE CLOSE BUTTON */}
+        <button
+          className="close-btn"
+          onClick={() => setSidebarOpen(false)}
+        >
+          ✕
+        </button>
 
-      </button>
+        {/* NEW MEETING BUTTON */}
+        <button
+          className="new-meeting-btn"
+          onClick={() => {
+            navigate("/recorder");
+            setSidebarOpen(false);
+          }}
+        >
+          + New Meeting
+        </button>
 
-      {/* History Title */}
+        {/* HISTORY TITLE */}
+        <h3 className="history-title">
+          History
+        </h3>
 
-      <h3 className="history-title">
+        {/* HISTORY LIST */}
+        <div className="history-list">
 
-        History
+          {meetings.map((item, index) => (
 
-      </h3>
+            <div
+              key={index}
+              className="history-item"
+              onClick={() => setSidebarOpen(false)}
+            >
+              {item}
+            </div>
 
-      {/* History List */}
+          ))}
 
-      <div className="history-list">
-
-        {meetings.map((item,index)=>(
-
-          <div
-            key={index}
-            className="history-item"
-          >
-
-            {item}
-
-          </div>
-
-        ))}
+        </div>
 
       </div>
 
-    </div>
+    </>
 
   );
 

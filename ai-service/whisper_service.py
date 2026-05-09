@@ -1,5 +1,3 @@
-# whisper_service.py
-
 from openai import OpenAI
 import os
 import re
@@ -91,10 +89,6 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
 
     try:
 
-        # =====================================
-        # INIT
-        # =====================================
-
         if speaker_map is None:
             speaker_map = {}
 
@@ -110,9 +104,7 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
 
         print(f"🎤 Processing audio: {file_size} bytes")
 
-        # =====================================
         # OPENAI TRANSCRIPTION
-        # =====================================
 
         with open(file_path, "rb") as audio:
 
@@ -131,9 +123,7 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
                 chunking_strategy="auto",
             )
 
-        # =====================================
         # DEBUG: inspect raw response structure
-        # =====================================
 
         print("\n🔍 DEBUG — raw response type:", type(response))
 
@@ -162,11 +152,8 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
         elif hasattr(first_seg, "keys"):
             print("   First segment keys:", list(first_seg.keys()))
 
-        # =====================================
         # BUILD TRANSCRIPT
-        # =====================================
-
-        # Collect all (stable_speaker_id, sentence) pairs first
+        
         entries = []
 
         for seg in segments:
@@ -209,16 +196,7 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
 
                 entries.append((stable_speaker_id, sentence))
 
-        # =====================================
         # FORMAT OUTPUT
-        # Goal:
-        #   Speaker 1: Hello there.
-        #   Speaker 1: How are you?
-        #
-        #   Speaker 2: I am doing well.
-        #
-        #   Speaker 1: Great!
-        # =====================================
 
         lines = []
         previous_speaker_id = None
@@ -233,9 +211,7 @@ def transcribe_audio(file_path, speaker_map=None, next_id=1):
 
             previous_speaker_id = stable_speaker_id
 
-        # =====================================
         # FINAL OUTPUT
-        # =====================================
 
         transcript = "\n".join(lines)
 

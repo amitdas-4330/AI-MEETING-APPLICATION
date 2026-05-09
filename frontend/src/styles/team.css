@@ -1,5 +1,7 @@
 /* =========================================================
    TEAM / DEVELOPER SECTION — ULTRA MODERN UI
+   RESPONSIVE VERSION
+   (DESIGN PRESERVED)
 ========================================================= */
 
 .footer-section {
@@ -30,15 +32,21 @@
   animation: fadeSlideUp 1s ease;
 }
 
-/* glowing background effects */
+/* =========================================================
+   GLOW EFFECTS
+========================================================= */
 
 .footer-section::before,
 .footer-section::after {
   content: "";
+
   position: absolute;
   border-radius: 50%;
+
   filter: blur(90px);
+
   z-index: 0;
+  pointer-events: none;
 }
 
 .footer-section::before {
@@ -93,6 +101,8 @@
   -webkit-text-fill-color: transparent;
 
   animation: titleFloat 4s ease-in-out infinite;
+
+  word-break: break-word;
 }
 
 .footer-section h2::after {
@@ -151,6 +161,7 @@
   z-index: 2;
 
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
   gap: 28px;
@@ -166,6 +177,8 @@
 .dev-card {
   position: relative;
   overflow: hidden;
+
+  min-width: 0;
 
   padding: 32px 24px;
 
@@ -188,7 +201,9 @@
     0 10px 35px rgba(0,0,0,0.25);
 }
 
-/* animated shine */
+/* =========================================================
+   SHINE EFFECT
+========================================================= */
 
 .dev-card::before {
   content: "";
@@ -204,6 +219,7 @@
   );
 
   transform: translateX(-120%);
+
   transition: 0.8s ease;
 }
 
@@ -211,7 +227,9 @@
   transform: translateX(120%);
 }
 
-/* hover effect */
+/* =========================================================
+   HOVER EFFECT
+========================================================= */
 
 .dev-card:hover {
   transform: translateY(-12px) scale(1.03);
@@ -262,10 +280,12 @@
 
   font-size: 22px;
   font-weight: 700;
+
+  word-break: break-word;
 }
 
 /* =========================================================
-   ROLE
+   ROLE / TEXT
 ========================================================= */
 
 .dev-card p {
@@ -273,6 +293,8 @@
 
   font-size: 14px;
   line-height: 1.7;
+
+  word-break: break-word;
 }
 
 /* =========================================================
@@ -284,6 +306,9 @@
 
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
   gap: 14px;
 }
 
@@ -306,6 +331,8 @@
   font-size: 18px;
 
   transition: all 0.35s ease;
+
+  flex-shrink: 0;
 }
 
 .socials a:hover {
@@ -397,6 +424,8 @@
   margin-bottom: 6px;
 
   font-size: 24px;
+
+  word-break: break-word;
 }
 
 .modal-card h4 {
@@ -412,6 +441,8 @@
 
   font-size: 14px;
   line-height: 1.7;
+
+  word-break: break-word;
 }
 
 /* =========================================================
@@ -440,6 +471,7 @@
   color: #7dd3fc;
 
   text-decoration: none;
+
   font-size: 13px;
   font-weight: 500;
 
@@ -578,22 +610,40 @@
 }
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1440px) {
+
+  .footer-section {
+    padding: 85px 55px;
+  }
+
+  .dev-container {
+    max-width: 1350px;
+  }
+
+}
+
+/* =========================================================
+   TABLET
 ========================================================= */
 
 @media (max-width: 1024px) {
 
   .footer-section {
     padding: 60px 24px;
+    border-radius: 28px;
   }
 
   .dev-container {
     gap: 22px;
   }
+
 }
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -616,6 +666,7 @@
 
   .dev-card {
     padding: 26px 20px;
+    border-radius: 24px;
   }
 
   .dev-card img {
@@ -630,16 +681,28 @@
   .modal-card {
     padding: 28px 20px;
   }
+
+  .footer-section::before {
+    width: 220px;
+    height: 220px;
+  }
+
+  .footer-section::after {
+    width: 180px;
+    height: 180px;
+  }
+
 }
 
 /* =========================================================
-   RESPONSIVE — SMALL MOBILE
+   SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 480px) {
 
   .footer-section {
     padding: 48px 14px;
+    border-radius: 22px;
   }
 
   .footer-section h2 {
@@ -655,10 +718,19 @@
     border-radius: 22px;
   }
 
+  .socials {
+    gap: 10px;
+  }
+
   .socials a {
     width: 38px;
     height: 38px;
+
     font-size: 16px;
+  }
+
+  .modal-card {
+    border-radius: 24px;
   }
 
   .modal-card h2 {
@@ -668,4 +740,5 @@
   .modal-card p {
     font-size: 13px;
   }
+
 }

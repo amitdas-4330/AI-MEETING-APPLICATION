@@ -11,43 +11,31 @@ const mongoose  = require("mongoose");
 const app    = express();
 const server = http.createServer(app);
 
-// =====================
 // MIDDLEWARE
-// =====================
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 
-// =====================
 // ROUTES
-// =====================
 app.use("/api/auth", require("./routes/authRoutes"));
 
-// =====================
 // DB
-// =====================
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ DB Error:", err.message));
 
-// =====================
 // SOCKET.IO
-// =====================
 const io = new Server(server, {
   cors: { origin: "http://localhost:5173", methods: ["GET", "POST"] },
 });
 
-// =====================
 // PER-USER STATE
-// =====================
-const userBuffers     = new Map(); // pending audio chunks
-const processingLock  = new Map(); // flush mutex
-const flushIntervals  = new Map(); // periodic flush handles
-const transcriptStore = new Map(); // rolling transcript text
+const userBuffers     = new Map();
+const processingLock  = new Map();
+const flushIntervals  = new Map();
+const transcriptStore = new Map();
 // session_id = socket.id (stable per meeting, reused across flushes)
 
-// =====================
 // CONNECTION
-// =====================
 io.on("connection", (socket) => {
   console.log("✅ User connected:", socket.id);
 
@@ -55,7 +43,7 @@ io.on("connection", (socket) => {
   processingLock.set(socket.id, false);
   transcriptStore.set(socket.id, "");
 
-  // ── START MEETING ──────────────────────────────────────────────
+  // START MEETING
   socket.on("start-meeting", () => {
     console.log("🎙 Meeting started:", socket.id);
 
@@ -74,7 +62,7 @@ io.on("connection", (socket) => {
     console.log("⏱  Flush interval started (every 6 s)");
   });
 
-  // ── AUDIO CHUNK ────────────────────────────────────────────────
+  // AUDIO CHUNK
   socket.on("audio-chunk", (chunk) => {
     try {
       if (!chunk) return;
@@ -99,7 +87,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  // ── END MEETING ────────────────────────────────────────────────
+  // END MEETING 
   socket.on("end-meeting", async () => {
     console.log("🛑 Meeting ended:", socket.id);
 
@@ -117,7 +105,7 @@ io.on("connection", (socket) => {
     transcriptStore.set(socket.id, "");
   });
 
-  // ── DISCONNECT ─────────────────────────────────────────────────
+  // DISCONNECT
   socket.on("disconnect", () => {
     console.log("❌ Disconnected:", socket.id);
 
@@ -130,9 +118,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// =====================
 // FLUSH AUDIO
-// =====================
 async function flushAudio(socket) {
   const sid = socket.id;
 
@@ -169,9 +155,7 @@ async function flushAudio(socket) {
   }
 }
 
-// =====================
 // PROCESS AUDIO  →  Flask
-// =====================
 async function processAudio(audioBuffer, socket, prevTranscript = "") {
   try {
     const form = new FormData();
@@ -181,7 +165,7 @@ async function processAudio(audioBuffer, socket, prevTranscript = "") {
       contentType : "audio/webm",
     });
 
-    // ── KEY FIX: send socket.id as session_id ──
+    // KEY FIX: send socket.id as session_id
     // Flask uses this to append chunks to the right growing .webm file
     // so the EBML/WebM header from chunk 1 is always present.
     form.append("session_id",      socket.id);
@@ -221,9 +205,7 @@ async function processAudio(audioBuffer, socket, prevTranscript = "") {
   }
 }
 
-// =====================
 // TELL FLASK TO CLEAN UP SESSION FILES
-// =====================
 async function endFlaskSession(sessionId) {
   try {
     await axios.post("http://127.0.0.1:8000/end-session", { session_id: sessionId });
@@ -233,7 +215,5 @@ async function endFlaskSession(sessionId) {
   }
 }
 
-// =====================
 // START
-// =====================
 server.listen(5000, () => console.log("🚀 Node server on port 5000"));

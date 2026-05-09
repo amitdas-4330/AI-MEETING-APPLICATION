@@ -15,9 +15,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
   const timerRef         = useRef(null);
   const chunkTimerRef    = useRef(null);
 
-  // =====================
   // SOCKET LISTENERS
-  // =====================
   useEffect(() => {
     const handleTranscript = (data) => {
       if (data?.text) {
@@ -43,9 +41,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
     };
   }, []);
 
-  // =====================
   // CLEANUP HELPER
-  // =====================
   const cleanup = () => {
     if (mediaRecorderRef.current?.state !== "inactive") {
       try { mediaRecorderRef.current.stop(); } catch (_) {}
@@ -72,25 +68,20 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
     chunkTimerRef.current = null;
   };
 
-  // =====================
   // START RECORDING
-  // =====================
   const startRecording = async () => {
     try {
       console.log("🎯 Requesting screen + tab audio...");
 
-      // ─── Screen / tab audio ───────────────────────────────────────────
-      // CRITICAL: ALL processing flags must be OFF.
-      // echoCancellation:true causes Chrome to treat incoming Meet audio
-      // as echo and silently remove it before it reaches MediaRecorder.
+      // Screen / tab audio
       const screenStream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
         audio: {
-          echoCancellation : false,   // ← MUST be false for Meet participant audio
-          noiseSuppression : false,   // ← MUST be false, suppression removes quiet voices
-          autoGainControl  : false,   // ← MUST be false, AGC distorts mixed audio
+          echoCancellation : false,   
+          noiseSuppression : false,   
+          autoGainControl  : false,   
           sampleRate       : 44100,
-          channelCount     : 2,       // stereo — Meet mixes all participants in stereo
+          channelCount     : 2,       
         },
       });
 
@@ -109,10 +100,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
       const appliedConstraints = screenAudioTracks[0].getSettings();
       console.log("🎛️ Tab audio settings:", appliedConstraints);
 
-      // ─── Microphone ───────────────────────────────────────────────────
-      // Also disable echo cancellation on mic — when echoCancellation is on,
-      // Chrome creates a shared audio processing pipeline that can interfere
-      // with the tab audio capture.
+      // Microphone
       let micStream = null;
       try {
         micStream = await navigator.mediaDevices.getUserMedia({
@@ -131,7 +119,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
         setAudioSources({ mic: false, screen: true });
       }
 
-      // ─── Merge tab audio + mic via AudioContext ────────────────────────
+      // Merge tab audio + mic via AudioContext
       const audioContext  = new AudioContext({ sampleRate: 44100 });
       audioContextRef.current = audioContext;
       const destination  = audioContext.createMediaStreamDestination();
@@ -148,7 +136,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
         micSource.connect(destination);
       }
 
-      // ─── Handle user stopping screen share manually ───────────────────
+      // Handle user stopping screen share manually
       const videoTrack = screenStream.getVideoTracks()[0];
       if (videoTrack) {
         videoTrack.addEventListener("ended", () => {
@@ -157,7 +145,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
         });
       }
 
-      // ─── MediaRecorder on merged audio stream ─────────────────────────
+      // MediaRecorder on merged audio stream
       let mimeType = "audio/webm;codecs=opus";
       if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = "audio/webm";
       if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = "";
@@ -216,9 +204,7 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
     }
   };
 
-  // =====================
   // STOP RECORDING
-  // =====================
   const stopRecording = () => {
     try {
       console.log("🛑 Stopping...");
@@ -235,23 +221,17 @@ function Recorder({ setTranscript, setSummary, setLoading }) {
     }
   };
 
-  // =====================
   // UNMOUNT CLEANUP
-  // =====================
   useEffect(() => () => cleanup(), []);
 
-  // =====================
   // FORMAT TIMER
-  // =====================
   const formatTime = (s) => {
     const m   = Math.floor(s / 60).toString().padStart(2, "0");
     const sec = (s % 60).toString().padStart(2, "0");
     return `${m}:${sec}`;
   };
 
-  // =====================
   // UI
-  // =====================
   return (
     <div className="recorder-container">
       <div className="recorder-card">

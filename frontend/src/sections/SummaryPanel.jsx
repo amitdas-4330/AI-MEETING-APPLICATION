@@ -23,7 +23,6 @@ function SummaryPanel({ summary, loading }) {
       <div className="panel-header">
         <h3>🤖 AI Summary</h3>
 
-        {/* 🔥 Download Button */}
         {summary && (
           <button onClick={downloadPDF} className="pdf-btn">
             ⬇ Download PDF

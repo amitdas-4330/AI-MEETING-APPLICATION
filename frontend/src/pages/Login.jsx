@@ -67,9 +67,7 @@ function Login() {
 
     <div className="auth-container">
 
-      {/* =====================================================
-          LEFT SIDE
-      ===================================================== */}
+      {/*LEFT SIDE*/}
       <div className="auth-left">
 
         <div className="brand-badge">
@@ -157,9 +155,7 @@ function Login() {
 
       </div>
 
-      {/* =====================================================
-          RIGHT SIDE
-      ===================================================== */}
+      {/*RIGHT SIDE*/}
       <div className="auth-right">
 
         <div className="login-box">

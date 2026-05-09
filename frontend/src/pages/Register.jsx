@@ -38,9 +38,7 @@ function Register() {
         }
       );
 
-      // =====================
-      // SAFETY CHECK (IMPORTANT)
-      // =====================
+      // SAFETY CHECK
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || `Server Error (${res.status})`);

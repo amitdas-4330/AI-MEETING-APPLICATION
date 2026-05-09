@@ -12,9 +12,6 @@ def translate_text(text, target="English"):
         if not text or not text.strip():
             return ""
 
-        # ─── GUARD: Don't translate if already in target language ───
-        # Saves an API call when Whisper already returns English.
-        # Remove this block if you always want to force re-translation.
         if target.lower() == "english":
             latin_ratio = sum(1 for c in text if c.isascii() and c.isalpha()) / max(len(text), 1)
             if latin_ratio > 0.85:
@@ -41,7 +38,7 @@ def translate_text(text, target="English"):
                 }
             ],
             temperature=0.3,
-            max_tokens=1024,   # prevent runaway responses on long transcripts
+            max_tokens=1024, 
         )
 
         result = response.choices[0].message.content.strip()

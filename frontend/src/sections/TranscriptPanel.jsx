@@ -5,7 +5,6 @@ function TranscriptPanel({ transcript = "", loading = false }) {
 
   const contentRef = useRef(null);
 
-  // Auto scroll
   useEffect(() => {
     if (contentRef.current) {
       contentRef.current.scrollTop =

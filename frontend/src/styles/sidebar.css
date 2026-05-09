@@ -3,12 +3,14 @@
 ========================================================= */
 
 .sidebar {
+
   position: fixed;
-  top: 64px;
+
+  top: 74px;
   left: 0;
 
   width: 290px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 74px);
 
   display: flex;
   flex-direction: column;
@@ -29,39 +31,43 @@
 
   overflow: hidden;
 
-  z-index: 1200;
+  z-index: 7000;
 
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.03),
-    0 20px 60px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.04);
+    0 20px 60px rgba(0,0,0,0.45);
 
-  animation: sidebarReveal 0.7s ease;
+  transition:
+    transform 0.35s ease,
+    width 0.3s ease;
 
   isolation: isolate;
+
+  will-change: transform;
 }
 
 /* =========================================================
-   BACKGROUND GLOW ORBS
+   GLOW EFFECTS
 ========================================================= */
 
 .sidebar::before,
 .sidebar::after {
+
   content: "";
 
   position: absolute;
+
   border-radius: 50%;
 
   filter: blur(70px);
 
-  opacity: 0.25;
+  opacity: 0.22;
 
   z-index: -1;
-
-  animation: floatingGlow 10s ease-in-out infinite;
 }
 
 .sidebar::before {
+
   width: 220px;
   height: 220px;
 
@@ -72,6 +78,7 @@
 }
 
 .sidebar::after {
+
   width: 180px;
   height: 180px;
 
@@ -79,46 +86,146 @@
 
   bottom: -60px;
   right: -80px;
-
-  animation-delay: 4s;
-}
-
-@keyframes floatingGlow {
-  0% {
-    transform: translateY(0px) scale(1);
-  }
-
-  50% {
-    transform: translateY(20px) scale(1.1);
-  }
-
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-}
-
-@keyframes sidebarReveal {
-  from {
-    opacity: 0;
-    transform: translateX(-35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* =========================================================
-   HEADER
+   HAMBURGER TOGGLE BUTTON
 ========================================================= */
 
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.sidebar-toggle {
 
-  margin-bottom: 24px;
+  position: fixed;
+
+  top: 12px;
+  left: 12px;
+
+  width: 46px;
+  height: 46px;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15,23,42,0.92),
+      rgba(30,41,59,0.88)
+    );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+
+  cursor: pointer;
+
+  z-index: 9500;
+
+  transition:
+    transform 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.sidebar-toggle:hover {
+
+  transform: translateY(-2px) scale(1.03);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30,41,59,0.95),
+      rgba(51,65,85,0.92)
+    );
+
+  box-shadow:
+    0 14px 35px rgba(59,130,246,0.22);
+}
+
+.sidebar-toggle:active {
+
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   HAMBURGER ICON
+========================================================= */
+
+.sidebar-toggle span {
+
+  position: absolute;
+
+  width: 22px;
+  height: 2.4px;
+
+  border-radius: 999px;
+
+  background: white;
+
+  transition: 0.3s ease;
+}
+
+.sidebar-toggle span:nth-child(1) {
+
+  transform: translateY(-7px);
+}
+
+.sidebar-toggle span:nth-child(2) {
+
+  opacity: 1;
+}
+
+.sidebar-toggle span:nth-child(3) {
+
+  transform: translateY(7px);
+}
+
+/* =========================================================
+   ACTIVE ICON
+========================================================= */
+
+.sidebar-toggle.active span:nth-child(1) {
+
+  transform: rotate(45deg);
+}
+
+.sidebar-toggle.active span:nth-child(2) {
+
+  opacity: 0;
+}
+
+.sidebar-toggle.active span:nth-child(3) {
+
+  transform: rotate(-45deg);
+}
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.close-btn {
+
+  display: none;
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  margin-bottom: 20px;
 }
 
 /* =========================================================
@@ -126,9 +233,8 @@
 ========================================================= */
 
 .new-meeting-btn {
-  position: relative;
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: none;
 
   padding: 15px;
 
@@ -137,60 +243,28 @@
   background:
     linear-gradient(
       135deg,
-      rgba(59,130,246,0.95),
-      rgba(99,102,241,0.95)
+      #3b82f6,
+      #6366f1
     );
 
   color: white;
 
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.4px;
 
   cursor: pointer;
 
-  overflow: hidden;
-
   margin-bottom: 26px;
 
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    border 0.35s ease;
-}
-
-/* animated shine */
-.new-meeting-btn::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent,
-      rgba(255,255,255,0.35),
-      transparent
-    );
-
-  transform: translateX(-120%);
-
-  transition: 0.8s ease;
-}
-
-.new-meeting-btn:hover::before {
-  transform: translateX(120%);
+  transition: 0.35s ease;
 }
 
 .new-meeting-btn:hover {
-  transform: translateY(-4px) scale(1.02);
+
+  transform: translateY(-3px);
 
   box-shadow:
-    0 0 30px rgba(59,130,246,0.45),
-    0 18px 40px rgba(59,130,246,0.35);
-
-  border-color: rgba(255,255,255,0.18);
+    0 12px 30px rgba(59,130,246,0.35);
 }
 
 /* =========================================================
@@ -198,12 +272,13 @@
 ========================================================= */
 
 .history-title {
-  position: relative;
 
   font-size: 12px;
+
   font-weight: 700;
 
   letter-spacing: 2px;
+
   text-transform: uppercase;
 
   color: rgba(255,255,255,0.5);
@@ -211,35 +286,12 @@
   margin-bottom: 18px;
 }
 
-.history-title::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: -8px;
-
-  width: 55px;
-  height: 3px;
-
-  border-radius: 999px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #38bdf8,
-      #8b5cf6
-    );
-
-  box-shadow:
-    0 0 12px rgba(56,189,248,0.6);
-}
-
 /* =========================================================
    HISTORY LIST
 ========================================================= */
 
 .history-list {
+
   flex: 1;
 
   overflow-y: auto;
@@ -247,12 +299,13 @@
   padding-right: 4px;
 }
 
-/* futuristic scrollbar */
 .history-list::-webkit-scrollbar {
+
   width: 5px;
 }
 
 .history-list::-webkit-scrollbar-thumb {
+
   border-radius: 999px;
 
   background:
@@ -268,7 +321,6 @@
 ========================================================= */
 
 .history-item {
-  position: relative;
 
   padding: 15px;
 
@@ -285,77 +337,18 @@
 
   border: 1px solid rgba(255,255,255,0.07);
 
-  overflow: hidden;
+  color: white;
 
   cursor: pointer;
 
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    border 0.35s ease,
-    background 0.35s ease;
-
-  animation: cardReveal 0.5s ease;
-}
-
-/* glowing beam */
-.history-item::before {
-  content: "";
-
-  position: absolute;
-
-  left: -100%;
-  top: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.08),
-      transparent
-    );
-
-  transition: 0.8s ease;
-}
-
-/* left neon border */
-.history-item::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: 12%;
-
-  width: 4px;
-  height: 76%;
-
-  border-radius: 999px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #38bdf8,
-      #8b5cf6
-    );
-
-  opacity: 0;
-
   transition: 0.35s ease;
-
-  box-shadow:
-    0 0 15px rgba(56,189,248,0.8);
-}
-
-.history-item:hover::before {
-  left: 100%;
 }
 
 .history-item:hover {
-  transform: translateX(6px) scale(1.015);
+
+  transform: translateX(6px);
+
+  border-color: rgba(56,189,248,0.22);
 
   background:
     linear-gradient(
@@ -364,69 +357,25 @@
       rgba(139,92,246,0.06)
     );
 
-  border-color: rgba(56,189,248,0.22);
-
   box-shadow:
-    0 10px 35px rgba(56,189,248,0.12),
-    0 0 25px rgba(59,130,246,0.12);
-}
-
-.history-item:hover::after {
-  opacity: 1;
-}
-
-/* ACTIVE ITEM */
-
-.history-item.active {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(59,130,246,0.18),
-      rgba(139,92,246,0.1)
-    );
-
-  border-color: rgba(56,189,248,0.35);
-
-  box-shadow:
-    0 0 25px rgba(56,189,248,0.16);
-}
-
-.history-item.active::after {
-  opacity: 1;
+    0 10px 35px rgba(56,189,248,0.12);
 }
 
 /* =========================================================
-   CARD REVEAL
+   OVERLAY
 ========================================================= */
 
-@keyframes cardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
+.sidebar-overlay {
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  position: fixed;
 
-/* =========================================================
-   EMPTY HISTORY
-========================================================= */
+  inset: 0;
 
-.empty-history {
-  text-align: center;
+  background: rgba(0,0,0,0.55);
 
-  padding: 30px 15px;
+  backdrop-filter: blur(3px);
 
-  color: #94a3b8;
-
-  line-height: 1.8;
-
-  font-size: 14px;
-
-  animation: fadeIn 0.6s ease;
+  z-index: 8500;
 }
 
 /* =========================================================
@@ -435,29 +384,80 @@
 
 @media (max-width: 768px) {
 
+  .sidebar-toggle {
+
+    display: flex;
+  }
+
   .sidebar {
-    top: 0;
+
+    top: 68px;
+
+    left: 0;
 
     width: 300px;
-    height: 100vh;
+
+    height: calc(100vh - 68px);
+
+    padding: 20px;
 
     transform: translateX(-100%);
+
+    transition: transform 0.35s ease;
+
+    z-index: 9000;
+
+    overflow-y: auto;
   }
 
   .sidebar.open {
+
     transform: translateX(0);
   }
+
+  .close-btn {
+
+    display: block;
+
+    align-self: flex-end;
+
+    margin-bottom: 16px;
+  }
 }
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
 @media (max-width: 480px) {
 
   .sidebar {
-    width: 86%;
+
+    width: 85%;
+
     padding: 16px;
   }
 
+  .sidebar-toggle {
+
+    width: 42px;
+    height: 42px;
+
+    top: 10px;
+    left: 10px;
+
+    border-radius: 12px;
+  }
+
+  .sidebar-toggle span {
+
+    width: 20px;
+  }
+
   .history-item {
+
     padding: 13px;
+
     font-size: 13px;
   }
 }

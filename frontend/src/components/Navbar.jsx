@@ -32,8 +32,9 @@ function Navbar() {
         Meeting<span>AI</span>
       </div>
 
+      {/* NAV MENU HAMBURGER — right side, toggles nav-center links */}
       <div
-        className={`hamburger ${menuOpen ? "active" : ""}`}
+        className={`nav-hamburger ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}
       >
         <div></div>
@@ -67,7 +68,7 @@ function Navbar() {
 
       <div className="nav-right">
 
-        <div className="profile-circle">U</div>
+        <div className="profile-circle">Gr-15</div>
 
         <button className="logout-btn" onClick={handleLogout}>
           <FiLogOut />

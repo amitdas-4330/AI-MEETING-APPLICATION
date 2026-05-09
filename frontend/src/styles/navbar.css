@@ -427,13 +427,20 @@
 
 /* =========================================================
    HAMBURGER
+   FIX: Moved outside navbar stacking context.
+   Uses position:fixed so it escapes navbar's backdrop-filter
+   stacking context and always renders above the sidebar.
 ========================================================= */
 
-.hamburger {
+.nav-hamburger {
   display: none;
 
-  position: relative;
-  z-index: 6000;
+  position: fixed;
+
+  right: 16px;
+  top: 13px; /* (68px navbar height - 42px button) / 2 */
+
+  z-index: 9500; /* beats sidebar z-index: 9000 */
 
   flex-direction: column;
   justify-content: center;
@@ -452,11 +459,11 @@
   transition: 0.35s ease;
 }
 
-.hamburger:hover {
+.nav-hamburger:hover {
   background: rgba(59,130,246,0.08);
 }
 
-.hamburger div {
+.nav-hamburger div {
   width: 20px;
   height: 2px;
 
@@ -469,15 +476,15 @@
   transition: all 0.35s ease;
 }
 
-.hamburger.open div:nth-child(1) {
+.nav-hamburger.open div:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
 
-.hamburger.open div:nth-child(2) {
+.nav-hamburger.open div:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger.open div:nth-child(3) {
+.nav-hamburger.open div:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
@@ -517,15 +524,11 @@
     justify-content: space-between;
   }
 
-  .hamburger {
+  .nav-hamburger {
     display: flex;
 
-    position: absolute;
-
     right: 16px;
-    top: 50%;
-
-    transform: translateY(-50%);
+    top: 13px; /* (68px - 42px) / 2 */
   }
 
   .nav-center {
@@ -619,8 +622,9 @@
     height: 8px;
   }
 
-  .hamburger {
+  .nav-hamburger {
     right: 12px;
+    top: 15px; /* (68px - 38px profile) centers ~same row visually */
   }
 
   .profile-circle {
