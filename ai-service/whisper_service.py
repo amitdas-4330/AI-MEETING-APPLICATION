@@ -167,10 +167,7 @@ def cleanup_sentence(sentence):
         "Amitabh Bachchan":
             "Amit Baran Das",
 
-        # -------------------------------------------------
         # COLLEGE FIXES
-        # -------------------------------------------------
-
         "Meghnad Saha Institute of Technology":
             "Meghnad Saha Institute of Technology",
 
