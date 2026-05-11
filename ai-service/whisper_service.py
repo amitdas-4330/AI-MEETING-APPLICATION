@@ -177,10 +177,7 @@ def cleanup_sentence(sentence):
         "that it's present in Kolkata":
             "which is located in Kolkata",
 
-        # -------------------------------------------------
         # TECH FIXES
-        # -------------------------------------------------
-
         "A I":
             "AI",
 
