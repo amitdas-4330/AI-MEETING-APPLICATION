@@ -47,7 +47,6 @@ An AI-powered meeting platform that records meetings, generates live transcripts
 * MongoDB
 * Mongoose
 * Socket.IO
-* Multer
 
 ## AI Service
 
@@ -55,97 +54,6 @@ An AI-powered meeting platform that records meetings, generates live transcripts
 * Whisper API
 * GPT API
 * PDF Generation
-
----
-
-# Installation Guide
-
-## 1. Clone Repository
-
-```bash
-git clone https://github.com/amitdas-4330/AI-MEETING-APPLICATION.git
-```
-
----
-
-## 2. Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend runs on:
-
-```bash
-http://localhost:5173
-```
-
----
-
-## 3. Backend Setup
-
-```bash
-cd backend
-npm install
-node server.js
-```
-
-Backend runs on:
-
-```bash
-http://localhost:5000
-```
-
----
-
-## 4. AI Service Setup
-
-Create virtual environment:
-
-```bash
-cd ai-service
-python -m venv venv
-```
-
-Activate environment:
-
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run Flask server:
-
-```bash
-python app.py
-```
-
-AI service runs on:
-
-```bash
-http://localhost:8000
-```
-
----
-
-# Environment Variables
-
-Create `.env` file in backend:
-
-```env
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
-OPENAI_API_KEY=your_openai_api_key
-```
 
 ---
 
@@ -217,8 +125,3 @@ AI & Full Stack Developer
 GitHub:
 [https://github.com/amitdas-4330](https://github.com/amitdas-4330)
 
----
-
-# License
-
-This project is developed for educational and portfolio purposes.
